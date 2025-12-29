@@ -6,148 +6,37 @@
     <title>Soul Dialogue | 靈魂對話</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #fdfaf6;
-            --accent: #c89666;
-            --text: #4a4a4a;
-            --card-back-color: #e8d3c0;
-        }
-        body {
-            font-family: 'Noto Serif', 'Noto Sans TC', serif;
-            background: var(--bg);
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .container {
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            padding: 20px;
-            perspective: 1000px; /* 為3D翻轉提供透視感 */
-        }
-
-        /* --- 卡片翻轉核心樣式 --- */
-        .card-wrapper {
-            width: 100%;
-            min-height: 300px;
-            position: relative;
-            margin-bottom: 2rem;
-            cursor: pointer;
-        }
-        .card-inner {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            text-align: center;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 增加一點回彈效果 */
-            transform-style: preserve-3d;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(200,150,102,0.1);
-        }
-        /* 當添加 flipped 類別時，卡片翻轉 180度 */
-        .card-wrapper.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden; /* Safari */
-            backface-visibility: hidden;
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 1.5rem;
-            box-sizing: border-box;
-            border: 1px solid rgba(200,150,102,0.1);
-        }
-        /* 卡片背面樣式 (未翻開時) */
-        .card-back {
-            background: var(--card-back-color);
-            color: white;
-            transform: rotateY(0deg);
-            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 20px, transparent 20px, transparent 40px);
-        }
-        .card-back-text {
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        /* 卡片正面樣式 (問題面) */
-        .card-front {
-            background: white;
-            transform: rotateY(180deg); /* 初始狀態是背面朝上 */
-        }
-
-        /* --- 問題文字樣式 --- */
-        #cat {
-            font-size: 0.7rem;
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .q-box {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        #q-cn {
-            font-size: 1.3rem;
-            line-height: 1.5;
-            font-weight: 700;
-            color: #2c2c2c;
-        }
-        #q-en {
-            font-size: 1rem;
-            line-height: 1.4;
-            color: #888;
-            font-family: 'Noto Sans TC', sans-serif; /* 英文用無襯線體更好讀 */
-            font-style: italic;
-        }
-
-        /* --- 按鈕樣式 --- */
-        .main-btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 1.2rem 2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            box-shadow: 0 10px 20px rgba(200,150,102,0.2);
-            font-weight: bold;
-        }
+        :root { --bg: #fdfaf6; --accent: #c89666; --text: #4a4a4a; --card-back-color: #e8d3c0; }
+        body { font-family: 'Noto Serif', 'Noto Sans TC', serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        .container { width: 90%; max-width: 400px; text-align: center; padding: 20px; perspective: 1000px; }
+        .card-wrapper { width: 100%; min-height: 350px; position: relative; margin-bottom: 2rem; cursor: pointer; }
+        .card-inner { width: 100%; height: 100%; position: absolute; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; border-radius: 30px; box-shadow: 0 15px 35px rgba(200,150,102,0.1); }
+        .card-wrapper.flipped .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem 1.5rem; box-sizing: border-box; border: 1px solid rgba(200,150,102,0.1); }
+        .card-back { background: var(--card-back-color); color: white; transform: rotateY(0deg); background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 20px, transparent 20px, transparent 40px); }
+        .card-back-text { font-size: 1.2rem; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; line-height: 1.5; }
+        .card-front { background: white; transform: rotateY(180deg); overflow-y: auto; }
+        #cat { font-size: 0.7rem; color: var(--accent); font-weight: bold; margin-bottom: 1rem; letter-spacing: 2px; text-transform: uppercase; }
+        .q-box { display: flex; flex-direction: column; gap: 0.8rem; }
+        #q-cn { font-size: 1.2rem; line-height: 1.4; font-weight: 700; color: #2c2c2c; }
+        #q-en { font-size: 0.9rem; line-height: 1.3; color: #777; font-family: 'Noto Sans TC', sans-serif; font-style: italic; }
+        .main-btn { background: var(--accent); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; font-size: 1rem; cursor: pointer; transition: 0.3s; width: 100%; box-shadow: 0 10px 20px rgba(200,150,102,0.2); font-weight: bold; }
         .main-btn:active { transform: scale(0.96); }
-        
-        .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 1.5rem; }
-        .f-btn { background: white; border: 1px solid var(--accent); color: var(--accent); padding: 8px 12px; font-size: 0.7rem; border-radius: 20px; cursor: pointer; transition: 0.2s; }
+        .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 1.5rem; }
+        .f-btn { background: white; border: 1px solid var(--accent); color: var(--accent); padding: 6px 10px; font-size: 0.65rem; border-radius: 20px; cursor: pointer; transition: 0.2s; }
         .f-btn.active { background: var(--accent); color: white; }
-        .btn-sub { display: block; font-size: 0.6rem; opacity: 0.8; margin-top: 2px;}
     </style>
 </head>
 <body>
 <div class="container">
-    
     <div class="card-wrapper" id="cardWrapper">
         <div class="card-inner">
             <div class="card-back">
                 <div class="card-back-text">SOUL<br>DIALOGUE</div>
-                <div style="font-size: 0.8rem; margin-top: 10px;">Tap button to reveal</div>
+                <div style="font-size: 0.7rem; margin-top: 10px; opacity: 0.8;">Draw a card to start<br>點擊按鈕開啟對話</div>
             </div>
             <div class="card-front">
-                <div id="cat">TOPIC 類別</div>
+                <div id="cat">TOPIC</div>
                 <div class="q-box">
                     <div id="q-cn">準備好了嗎？</div>
                     <div id="q-en">Are you ready?</div>
@@ -155,279 +44,313 @@
             </div>
         </div>
     </div>
-
-    <button class="main-btn" onclick="drawAction()">
-        抽取話題 <span style="display:block; font-size:0.8rem; font-weight:normal;">Draw a Question</span>
-    </button>
-    
+    <button class="main-btn" onclick="drawAction()">抽取話題 Draw a Question</button>
     <div class="filters">
-        <button class="f-btn active" onclick="setCat('all', this)">全部<span class="btn-sub">All</span></button>
-        <button class="f-btn" onclick="setCat('love', this)">愛情<span class="btn-sub">Love</span></button>
-        <button class="f-btn" onclick="setCat('life', this)">個性<span class="btn-sub">Self</span></button>
-        <button class="f-btn" onclick="setCat('world', this)">世界觀<span class="btn-sub">Values</span></button>
-        <button class="f-btn" onclick="setCat('money', this)">金錢<span class="btn-sub">Money</span></button>
-        <button class="f-btn" onclick="setCat('deep', this)">深層<span class="btn-sub">Deep</span></button>
+        <button class="f-btn active" onclick="setCat('all', this)">全部 All</button>
+        <button class="f-btn" onclick="setCat('special', this)">情境 Special</button>
+        <button class="f-btn" onclick="setCat('love', this)">愛情 Love</button>
+        <button class="f-btn" onclick="setCat('life', this)">自我 Self</button>
+        <button class="f-btn" onclick="setCat('world', this)">價值 Values</button>
+        <button class="f-btn" onclick="setCat('money', this)">金錢 Money</button>
+        <button class="f-btn" onclick="setCat('deep', this)">創傷 Deep</button>
     </div>
 </div>
 
 <script>
-    // 完整 200 題中英雙語資料庫
     const data = {
+        special: [
+            {cn:"你覺得「確認關係」的標誌是什麼？", en:"What do you think marks the transition from 'dating' to a 'relationship'?"},
+            {cn:"你能接受在還沒定義關係前，對方同時跟別人約會嗎？", en:"Can you accept your partner dating others before the relationship is officially defined?"},
+            {cn:"你覺得「Situationship」是一種享受當下，還是一種對責任的逃避？", en:"Do you see a 'situationship' as enjoying the moment or an escape from responsibility?"},
+            {cn:"你曾有過一段讓你心碎的「非正式關係」嗎？", en:"Have you ever had an 'informal relationship' that left you heartbroken?"},
+            {cn:"對你而言，約會多久後應該討論「我們現在是什麼關係」？", en:"In your opinion, after how long should a couple discuss 'what are we'?"},
+            {cn:"你如何看待「認真約會但沒有名分」這件事？", en:"What’s your take on 'serious dating' without an official title?"},
+            {cn:"你覺得「友達以上，戀人未滿」最痛苦的部分是什麼？", en:"What’s the most painful part of being 'more than friends but less than lovers'?"},
+            {cn:"什麼樣的行為會讓你覺得對方已經把你當成伴侶了？", en:"What actions make you feel that someone already considers you their partner?"},
+            {cn:"你害怕給這段關係下定義嗎？", en:"Are you afraid of putting a label on a relationship?"},
+            {cn:"你相信「不求天長地久，只求曾經擁有」嗎？", en:"Do you believe in 'not seeking forever, only seeking the moment'?"},
+            {cn:"曖昧期對你來說，是整段關係最美好的時候嗎？", en:"Is the 'situationship' phase the most beautiful part of a relationship for you?"},
+            {cn:"你會為了維持曖昧而隱藏自己的佔有慾嗎？", en:"Would you hide your possessiveness just to maintain the 'situationship'?"},
+            {cn:"你對「砲友」轉正為伴侶的成功率看法？", en:"What's your view on the success rate of 'Friends with Benefits' becoming actual partners?"},
+            {cn:"你覺得現代約會文化中，最讓人疲累的一點是什麼？", en:"What do you find most exhausting about modern dating culture?"},
+            {cn:"你的直覺通常能精準判斷對方是否想認真發展嗎？", en:"Does your intuition accurately tell you if someone wants a serious relationship?"},
+            {cn:"你相信遠距離戀愛能有開花結果的一天嗎？", en:"Do you believe a long-distance relationship can actually work out in the end?"},
+            {cn:"你能忍受多久見不到伴侶一面？", en:"How long can you go without seeing your partner in person?"},
+            {cn:"對你而言，遠距離最難克服的是孤獨感還是信任感？", en:"Is the hardest part of long-distance the loneliness or the trust?"},
+            {cn:"遠距離時，你最希望伴侶每天為你做的一件事是什麼？", en:"What’s the one thing you’d want your partner to do for you every day during long-distance?"},
+            {cn:"你願意為了愛的人搬到一個完全陌生的城市嗎？", en:"Would you move to a completely unfamiliar city for the person you love?"},
+            {cn:"你覺得「視訊通話」能代替真實的擁抱嗎？", en:"Do you think video calls can replace a physical hug?"},
+            {cn:"遠距離時，你會因為對方回覆訊息太慢而焦慮嗎？", en:"In long-distance, do you get anxious if the other person replies slowly?"},
+            {cn:"你如何定義遠距離中的「出軌」？", en:"How do you define 'cheating' in a long-distance relationship?"},
+            {cn:"你覺得要有「明確的見面計畫」是維持遠距離的必要條件嗎？", en:"Is having a 'definite plan to meet' necessary to sustain long-distance?"},
+            {cn:"遠距離中，你最怕發生的事情是什麼？", en:"What is your biggest fear in a long-distance relationship?"},
+            {cn:"如果我們開始遠距離，你覺得我們最大的優勢是什麼？", en:"If we started long-distance, what do you think would be our greatest strength?"},
+            {cn:"你曾經有過成功的遠距離經驗嗎？", en:"Have you ever had a successful long-distance experience?"},
+            {cn:"妳覺得兩個人之間隔著時差，是浪漫還是折磨？", en:"Is having a time difference between two people romantic or torturous?"},
+            {cn:"你願意為了一段有潛力的愛冒險嘗試遠距離嗎？", en:"Are you willing to risk a long-distance trial for a love with potential?"},
+            {cn:"當遠距離結束、兩人真正同居時，你最擔心的摩擦是什麼？", en:"What friction do you fear most when long-distance ends and you finally live together?"},
+            {cn:"你覺得文化背景不同，是會增加吸引力還是增加摩擦？", en:"Do you think different cultural backgrounds increase attraction or friction?"},
+            {cn:"你最不能理解的一種外國文化習俗是什麼？", en:"What is one foreign cultural custom that you find hardest to understand?"},
+            {cn:"你覺得「語言障礙」會影響靈魂的深層溝通嗎？", en:"Do you think language barriers affect deep soul communication?"},
+            {cn:"當你的家人反對你交往外國人時，你會如何處理？", en:"How would you handle it if your family opposed you dating a foreigner?"},
+            {cn:"你覺得法國人與亞洲人在愛情表達上最大的差別是什麼？", en:"What’s the biggest difference between French and Asian people in expressing love?"},
+            {cn:"在你的文化裡，帶另一半回家見父母代表什麼意義？", en:"In your culture, what does it mean to take a partner home to meet your parents?"},
+            {cn:"你會為了適應對方的文化而改變自己的生活習慣嗎？", en:"Would you change your lifestyle habits to adapt to your partner's culture?"},
+            {cn:"你覺得食物口味的差異，會影響兩個人的感情嗎？", en:"Do you think differences in food tastes affect a couple's relationship?"},
+            {cn:"你對「異國婚姻」最浪漫與最現實的擔憂是什麼？", en:"What are your most romantic fantasies and most realistic worries about international marriage?"},
+            {cn:"哪一個文化衝突曾讓你覺得「天啊，我們真的好不一樣」？", en:"Which cultural clash once made you think, 'OMG, we are so different'?"},
+            {cn:"你希望你的伴侶努力學習你的母語嗎？", en:"Do you want your partner to put effort into learning your mother tongue?"},
+            {cn:"你覺得在異國戀中，哪一方應該做出更多的妥協？", en:"Who do you think should make more compromises in a cross-cultural relationship?"},
+            {cn:"異國戀中，你覺得「笑點不同」是一個嚴重的問題嗎？", en:"Is 'having different senses of humor' a serious problem in international dating?"},
+            {cn:"當兩人在異國生活時，你如何平衡對家鄉的思念？", en:"How do you balance homesickness when living as a couple in a foreign country?"},
+            {cn:"你覺得混血兒在成長過程中，最大的優勢是什麼？", en:"What do you think is the biggest advantage for mixed-race children growing up?"},
+            {cn:"宗教信仰的差異對你來說是交友/擇偶的障礙嗎？", en:"Are religious differences an obstacle in your choice of friends or partners?"},
+            {cn:"你最喜歡我的文化中的哪一個部分？", en:"What is the one part of my culture that you love the most?"},
+            {cn:"你覺得哪種跨國戀的刻板印象最讓你反感？", en:"Which cross-cultural relationship stereotype annoys you the most?"},
+            {cn:"如果你要定居，你會選擇我的國家、你的國家，還是第三國？", en:"If we were to settle down, would you choose my country, yours, or a third one?"},
+            {cn:"最後，你覺得愛能超越所有的國界與文化嗎？", en:"Finally, do you believe that love can transcend all borders and cultures?"}
+        ],
         love: [
             {cn:"你覺得愛是一種感覺，還是一個決定？", en:"Do you believe love is a feeling, or a conscious choice?"},
-            {cn:"你理想中的「個人空間」與「兩人世界」比例是多少？", en:"What is your ideal ratio between 'personal space' and 'couple time'?"},
+            {cn:"你理想中的個人空間與兩人世界比例是多少？", en:"What is your ideal ratio between 'personal space' and 'couple time'?"},
             {cn:"你收過最讓你感動的告白是什麼樣的？", en:"What is the most touching confession of love you've ever received?"},
             {cn:"你如何定義「靈魂伴侶」？", en:"How do you define a 'soulmate'?"},
             {cn:"你相信一見鍾情還是日久生情？", en:"Do you believe in love at first sight, or does love grow over time?"},
             {cn:"嫉妒是愛的證明，還是不安全的表現？", en:"Is jealousy a proof of love, or a sign of insecurity?"},
-            {cn:"在感情中，你最不可妥協的特質是什麼？", en:"What is the one non-negotiable trait for you in a relationship?"},
+            {cn:"在感情中，你最不可妥協的特質是什麼？", en:"What is the one non-negotiable trait in a relationship?"},
             {cn:"你覺得「浪漫」是可以練習的嗎？", en:"Do you think 'romance' is a skill that can be practiced?"},
             {cn:"什麼樣的讚美會讓你心跳加速？", en:"What kind of compliment makes your heart skip a beat?"},
             {cn:"你對「前任」的態度通常是斷絕往來嗎？", en:"Do you usually cut off all contact with ex-partners?"},
-            {cn:"你覺得「穩定」等於「無聊」嗎？", en:"Do you equate 'stability' in a relationship with 'boredom'?"},
-            {cn:"你最害怕在愛情中展現出的醜陋面是什麼？", en:"What is the ugly side of yourself that you are most afraid to show in love?"},
+            {cn:"你覺得「穩定」等於「無聊」嗎？", en:"Do you equate 'stability' with 'boredom'?"},
+            {cn:"你最害怕在愛情中展現出的醜陋面是什麼？", en:"What is the ugly side of yourself you're afraid to show in love?"},
             {cn:"你希望我們五年後的相處狀態是什麼樣的？", en:"What do you hope our relationship looks like in five years?"},
             {cn:"你曾為了愛一個人，而失去過自我嗎？", en:"Have you ever lost yourself trying to love someone else?"},
             {cn:"對你而言，什麼是「無條件的愛」？", en:"What does 'unconditional love' mean to you?"},
-            {cn:"哪一段戀情讓你學到最多關於「自己」的事？", en:"Which past relationship taught you the most about yourself?"},
-            {cn:"你覺得「承諾」對你而言是壓力還是動力？", en:"Is 'commitment' a source of pressure or motivation for you?"},
+            {cn:"哪一段戀情讓你學到最多關於「自己」的事？", en:"Which relationship taught you the most about yourself?"},
+            {cn:"你覺得「承諾」對你而言是壓力還是動力？", en:"Is 'commitment' a source of pressure or motivation?"},
             {cn:"你覺得性與愛可以完全分離嗎？", en:"Do you think sex and love can be completely separated?"},
-            {cn:"什麼樣的行為會讓你覺得「這就是愛」的小細節？", en:"What small actions make you feel 'this is what love is'?"},
-            {cn:"你希望我在你脆弱的時候，是給你建議還是抱抱你？", en:"When you are vulnerable, do you prefer advice or just a hug?"},
-            {cn:"你認為男人在一段關係中，最容易被忽視的需求是什麼？", en:"What do you think is a man's most overlooked need in a relationship?"},
+            {cn:"什麼樣的行為會讓你覺得「這就是愛」的小細節？", en:"What small actions make you feel 'this is love'?"},
+            {cn:"你希望我在你脆弱的時候，是給你建議還是抱抱你？", en:"When vulnerable, do you prefer advice or just a hug?"},
+            {cn:"你認為男人在一段關係中，最容易被忽視的需求是什麼？", en:"What is a man's most overlooked need in a relationship?"},
             {cn:"你覺得「忠誠」在一段感情中是絕對的嗎？", en:"Do you believe faithfulness is absolute in a relationship?"},
             {cn:"你最渴望從伴侶身上得到什麼樣的理解？", en:"What kind of understanding do you most crave from a partner?"},
-            {cn:"你覺得這趟旅行我做的最讓你開心的事是什麼？", en:"What's the thing I've done on this trip that made you happiest?"},
+            {cn:"你覺得這趟旅行我做的最讓你開心的事是什麼？", en:"What thing on this trip has made you the happiest?"},
             {cn:"你在一段關係中最難開口要求的事是什麼？", en:"What is the hardest thing for you to ask for in a relationship?"},
-            {cn:"你對「遠距離戀愛」的接受度是多少？", en:"What is your tolerance level for long-distance relationships?"},
-            {cn:"你覺得兩個人在一起，一定要有共同興趣嗎？", en:"Do you think couples must have shared interests to work?"},
-            {cn:"你心目中「完美的伴侶」應該具備哪三種特質？", en:"What three traits must your 'perfect partner' possess?"},
-            {cn:"你曾因為恐懼承諾而逃避過一段感情嗎？", en:"Have you ever run away from a relationship out of fear of commitment?"},
-            {cn:"你覺得愛情會隨時間轉化成親情嗎？你抗拒嗎？", en:"Do you think love inevitably turns into familial affection? Do you resist this?"},
+            {cn:"你對「遠距離戀愛」的接受度是多少？", en:"What is your tolerance for long-distance relationships?"},
+            {cn:"你覺得兩個人在一起，一定要有共同興趣嗎？", en:"Do you think couples must have shared interests?"},
+            {cn:"你心目中「完美的伴侶」應該具備哪三種特質？", en:"What three traits must your 'perfect partner' have?"},
+            {cn:"你曾因為恐懼承諾而逃避過一段感情嗎？", en:"Have you ever run from a relationship out of fear of commitment?"},
+            {cn:"你覺得愛情會隨時間轉化成親情嗎？", en:"Do you think love inevitably turns into familial affection?"},
             {cn:"你覺得被愛和被理解，哪個更重要？", en:"Which is more important: being loved or being understood?"},
-            {cn:"當我們爭執時，你傾向冷靜一下還是當場解決？", en:"When we argue, do you prefer to cool down first or resolve it immediately?"},
-            {cn:"你覺得最大的背叛除了出軌還有什麼？", en:"Besides cheating, what do you consider the biggest betrayal in love?"},
-            {cn:"你最希望我能崇拜你的哪一點？", en:"What is the one thing about yourself you most wish I admired?"},
-            {cn:"你覺得愛情中有哪些事是絕對不能說謊的？", en:"What are the things you must never lie about in a relationship?"},
-            {cn:"哪一種相處方式會讓你感到窒息？", en:"What kind of relationship dynamic makes you feel suffocated?"},
+            {cn:"當我們爭執時，你傾向冷靜一下還是當場解決？", en:"When we argue, do you prefer to cool down or resolve it now?"},
+            {cn:"你覺得最大的背叛除了出軌還有什麼？", en:"Besides cheating, what is the biggest betrayal in love?"},
+            {cn:"你最希望我能崇拜你的哪一點？", en:"What is the one thing about yourself you wish I admired?"},
+            {cn:"你覺得愛情中有哪些事是絕對不能說謊的？", en:"What are the things you must never lie about in love?"},
+            {cn:"哪一種相處方式會讓你感到窒息？", en:"What kind of dynamic makes you feel suffocated?"},
             {cn:"你對開放式關係的看法？", en:"What is your view on open relationships?"},
-            {cn:"當發現對方有無法接受的缺點，你會包容還是離開？", en:"When you find an unacceptable flaw in a partner, do you tolerate it or leave?"},
-            {cn:"你曾在感情中是被動方還是主動方？", en:"Have you generally been the passive or active partner in relationships?"},
-            {cn:"如果有一天我變老變醜了，你的愛會改變嗎？", en:"If I become old or ugly someday, how would your love change?"}
+            {cn:"當發現對方有無法接受的缺點，你會包容還是離開？", en:"When you find an unacceptable flaw, do you stay or leave?"},
+            {cn:"你曾在感情中是被動方還是主動方？", en:"Have you generally been the passive or active partner?"},
+            {cn:"如果有一天我變老變醜了，你的愛會改變嗎？", en:"If I become old or ugly, how would your love change?"}
         ],
         life: [
-            {cn:"你童年最深刻的一種氣味是什麼？", en:"What is a childhood scent that has stayed deeply with you?"},
-            {cn:"你小時候跟父母中哪一位比較親？為什麼？", en:"Which parent were you closer to growing up, and why?"},
             {cn:"你最不喜歡自己性格中的哪一部分？", en:"What part of your own personality do you dislike the most?"},
-            {cn:"當你安靜下來時，你腦中出現最頻繁的念頭是什麼？", en:"When you get quiet, what thought crosses your mind most frequently?"},
-            {cn:"你覺得孤獨與寂寞之間最大的差別是什麼？", en:"What is the biggest difference between being 'alone' and being 'lonely'?"},
-            {cn:"你對自己的哪一部分最感到自豪？", en:"What part of yourself are you most proud of?"},
+            {cn:"當你心情極度糟糕時，你最希望別人怎麼對待你？", en:"When you're in a terrible mood, how do you want to be treated?"},
             {cn:"什麼樣的小事會讓你瞬間感到快樂？", en:"What small thing can instantly make you feel happy?"},
-            {cn:"你是一個完美主義者嗎？在哪方面最明顯？", en:"Are you a perfectionist? In what area is it most obvious?"},
-            {cn:"你覺得你的內心幾歲？（心理年齡）", en:" how old does your inner self feel? (Mental age)"},
-            {cn:"你如何處理壓力？", en:"How do you cope with stress?"},
+            {cn:"你覺得自己是一個容易焦慮的人嗎？", en:"Do you consider yourself an anxious person?"},
+            {cn:"你對「憤怒」的表達方式是什麼？", en:"How do you express your anger?"},
+            {cn:"哪一個形容詞是你最希望別人用來形容你的？", en:"What adjective do you most want others to use for you?"},
+            {cn:"你覺得自己更傾向於感性還是理性？", en:"Are you more ruled by your heart or your head?"},
+            {cn:"你有什麼「社交恐懼」的時刻嗎？", en:"Do you have any 'socially anxious' moments?"},
+            {cn:"什麼事情會讓你感到強烈的挫敗感？", en:"What thing gives you a strong sense of frustration?"},
             {cn:"你的自卑感通常來源於哪裡？", en:"Where do your feelings of inferiority usually stem from?"},
-            {cn:"你最怕被看穿的一面是什麼？", en:"What side of you are you most afraid of having others see through?"},
             {cn:"你覺得自己是一個「容易親近」的人嗎？", en:"Do you consider yourself an 'approachable' person?"},
+            {cn:"你是一個完美主義者嗎？", en:"Are you a perfectionist?"},
+            {cn:"你對別人的評價在意程度有多少？", en:"How much do you care about what others think of you?"},
+            {cn:"你覺得你的內心幾歲？", en:"How old does your inner self feel?"},
+            {cn:"你最怕被看穿的一面是什麼？", en:"What side of you are you most afraid of people seeing through?"},
+            {cn:"你的性格裡最讓別人受不了的一點是什麼？", en:"What part of your personality is hardest for others to stand?"},
+            {cn:"如果你現在可以給自己寫一封信，第一句話會是什麼？", en:"If you could write a letter to yourself now, what's the first sentence?"},
+            {cn:"你童年最深刻的一種氣味是什麼？", en:"What is a childhood scent that has stayed deeply with you?"},
+            {cn:"你小時候跟父母中哪一位比較親？", en:"Which parent were you closer to growing up?"},
+            {cn:"當你安靜下來時，你腦中出現最頻繁的念頭是什麼？", en:"When you get quiet, what thought crosses your mind most?"},
+            {cn:"你覺得孤獨與寂寞之間最大的差別是什麼？", en:"What is the biggest difference between 'alone' and 'lonely'?"},
+            {cn:"你對自己的哪一部分最感到自豪？", en:"What part of yourself are you most proud of?"},
+            {cn:"你如何處理壓力？", en:"How do you cope with stress?"},
             {cn:"你最受不了的社交禮儀是什麼？", en:"What social etiquette do you find most unbearable?"},
             {cn:"你有什麼不為人知的小習慣或怪癖？", en:"Do you have any hidden habits or quirks?"},
-            {cn:"你心情不好時，會聽什麼樣的音樂？", en:"What kind of music do you listen to when you're in a bad mood?"},
+            {cn:"你心情不好時，會聽什麼樣的音樂？", en:"What music do you listen to when in a bad mood?"},
             {cn:"你是一個早起型的人，還是夜貓子？", en:"Are you an early bird or a night owl?"},
             {cn:"你小時候夢想的職業是什麼？", en:"What was your dream job when you were a child?"},
-            {cn:"你第一次意識到自己「長大成人」的時刻？", en:"When was the first moment you realized you had become an 'adult'?"},
+            {cn:"你第一次意識到自己「長大成人」的時刻？", en:"The moment you realized you had become an adult?"},
             {cn:"你的第一個偶像是誰？", en:"Who was your very first idol?"},
             {cn:"你覺得「脆弱」是一種力量嗎？", en:"Do you think 'vulnerability' is a form of strength?"},
             {cn:"你的自律程度如何？", en:"How would you rate your level of self-discipline?"},
-            {cn:"你更傾向於感性（心主導）還是理性（腦主導）？", en:"Are you more ruled by your heart (emotional) or your head (rational)?"},
             {cn:"什麼樣的人會讓你產生想保護他的慾望？", en:"What kind of person triggers your desire to protect them?"},
-            {cn:"你覺得「誠實」與「禮貌」發生衝突時，該選哪一個？", en:"When honesty conflicts with politeness, which should you choose?"},
-            {cn:"你的朋友圈通常是由什麼樣的人組成的？", en:"What kind of people usually make up your circle of friends?"},
+            {cn:"「誠實」與「禮貌」衝突時，該選哪一個？", en:"When honesty conflicts with politeness, which should you choose?"},
+            {cn:"你的朋友圈通常是由什麼樣的人組成的？", en:"What kind of people make up your circle of friends?"},
             {cn:"你最遺憾沒能學會的一項技能是什麼？", en:"What skill do you most regret not learning?"},
-            {cn:"你覺得你的性格中，哪一部分最像你父親，哪一部分最像你母親？", en:"Which part of your personality is most like your father, and which like your mother?"},
+            {cn:"性格哪部分像你父親，哪部分像你母親？", en:"Which part of you is like your father, and which like your mother?"},
             {cn:"你小時候是個叛逆的孩子，還是個乖孩子？", en:"Were you a rebellious child or an obedient one?"},
             {cn:"你覺得自己更像貓還是更像狗？", en:"Do you feel you are more like a cat or a dog?"},
-            {cn:"你最想對十年前的自己說的一句話？", en:"What one sentence would you most like to say to your self from ten years ago?"},
-            {cn:"你最希望別人怎麼記得你？", en:"How do you hope to be remembered by others?"},
-            {cn:"你對自己的外表最滿意和最不滿意的地方？", en:"What are you most and least satisfied with regarding your appearance?"},
-            {cn:"你是一個守時的人嗎？", en:"Are you a punctual person?"},
-            {cn:"你的能量來源是安靜自處，還是與人交流？", en:"Do you gain energy from quiet solitude or from interacting with others?"},
-            {cn:"如果你能擁有一項超能力，你會選擇什麼？", en:"If you could have one superpower, what would it be?"},
-            {cn:"你對社交媒體的真實看法？", en:"What is your honest opinion on social media?"},
-            {cn:"你最常對自己說的一句口頭禪？", en:"What phrase do you say to yourself most often?"},
-            {cn:"你覺得自己是一個有幽默感的人嗎？", en:"Do you consider yourself a person with a sense of humor?"},
-            {cn:"你曾為了取悅別人而做過最違背自己的事是什麼？", en:"What is the most compromising thing you've ever done just to please someone else?"}
+            {cn:"你最希望別人怎麼記得你？", en:"How do you hope to be remembered by others?"}
         ],
         world: [
-            {cn:"你相信命運嗎？還是覺得一切都是巧合？", en:"Do you believe in fate, or do you think everything is coincidence?"},
+            {cn:"你相信命運嗎？還是覺得一切都是巧合？", en:"Do you believe in fate, or is everything a coincidence?"},
             {cn:"你對「自由」的定義是什麼？", en:"What is your definition of 'freedom'?"},
             {cn:"你認為人性本善還是本惡？", en:"Do you believe human nature is inherently good or evil?"},
-            {cn:"你覺得科技讓人類更接近，還是更疏離了？", en:"Has technology brought humanity closer together or driven us further apart?"},
-            {cn:"如果可以跟任何一個歷史人物對話，你會選誰？", en:"If you could speak with any historical figure, who would you choose?"},
+            {cn:"你覺得科技讓人類更接近，還是更疏離了？", en:"Has technology brought us closer or driven us apart?"},
+            {cn:"如果可以跟任何一個歷史人物對話，你會選誰？", en:"If you could speak with any historical figure, who'd it be?"},
             {cn:"你覺得這個世界正在變得更好還是更壞？", en:"Do you think the world is getting better or worse?"},
-            {cn:"如果可以預知未來，你想知道哪一件事？", en:"If you could foresee the future, what one thing would you want to know?"},
+            {cn:"如果可以預知未來，你想知道哪一件事？", en:"If you could foresee the future, what would you want to know?"},
             {cn:"你對「政治正確」的看法是什麼？", en:"What are your views on 'political correctness'?"},
             {cn:"你覺得美德是可以被教導的嗎？", en:"Do you think virtue can be taught?"},
-            {cn:"如果你能為世界制定一條法律，那會是什麼？", en:"If you could enact one law for the whole world, what would it be?"},
-            {cn:"你覺得旅行是為了發現世界，還是為了發現自己？", en:"Do you travel to discover the world, or to discover yourself?"},
+            {cn:"如果你能為世界制定一條法律，那會是什麼？", en:"If you could enact one law for the world, what would it be?"},
+            {cn:"旅行是為了發現世界，還是為了發現自己？", en:"Do you travel to discover the world or to discover yourself?"},
             {cn:"你最嚮往哪一個歷史時代？", en:"Which historical era are you most drawn to?"},
-            {cn:"你相信有「善有善報」這件事嗎？", en:"Do you believe in the concept of 'karma' or that good deeds are rewarded?"},
+            {cn:"你相信有「善有善報」這件事嗎？", en:"Do you believe in the concept of karma?"},
             {cn:"你覺得這世界上有「絕對的正義」嗎？", en:"Do you think 'absolute justice' exists in this world?"},
             {cn:"你如何定義「美」？", en:"How do you define 'beauty'?"},
-            {cn:"你覺得「智慧」與「聰明」的分別在哪？", en:"What is the difference between 'wisdom' and 'intelligence'?"},
-            {cn:"如果你可以消除世界上的一種苦難，你會選什麼？", en:"If you could eliminate one form of suffering from the world, what would it be?"},
-            {cn:"你覺得現代社會最讓你受不了的一種價值觀是什麼？", en:"What modern societal value can you stand the least?"},
+            {cn:"你覺得「智慧」與「聰明」的分別在哪？", en:"What is the difference between wisdom and intelligence?"},
+            {cn:"如果你可以消除一種苦難，你會選什麼？", en:"If you could eliminate one form of suffering, what would it be?"},
+            {cn:"現代社會最讓你受不了的一種價值觀是什麼？", en:"What modern societal value can you stand the least?"},
             {cn:"如果世界末日明天就來，你今天會做什麼？", en:"If the world were ending tomorrow, what would you do today?"},
-            {cn:"你對「外星生命」的想像？", en:"What are your thoughts or imagination regarding extraterrestrial life?"},
+            {cn:"你對「外星生命」的想像？", en:"What are your thoughts regarding extraterrestrial life?"},
             {cn:"你覺得藝術的目的是什麼？", en:"What do you think is the purpose of art?"},
-            {cn:"你覺得教育的目的是為了生存，還是為了覺醒？", en:"Is the purpose of education for survival or for enlightenment?"},
+            {cn:"教育是為了生存，還是為了覺醒？", en:"Is education for survival or for enlightenment?"},
             {cn:"你心目中理想的世界秩序是什麼樣的？", en:"What does your ideal world order look like?"},
             {cn:"你覺得文化差異是阻礙還是禮物？", en:"Do you see cultural differences as obstacles or gifts?"},
             {cn:"你對人類最終命運的看法是什麼？", en:"What is your view on the ultimate fate of humanity?"},
-            {cn:"如果你可以選擇出生在另一個時代，你會選哪裡？", en:"If you could choose to be born in another era, when would it be?"},
-            {cn:"你覺得法國在世界地圖上代表著什麼樣的精神？", en:"What spirit do you think France represents on the world stage?"},
-            {cn:"你覺得男人與女人在現代社會中真的平等了嗎？", en:"Do you think men and women are truly equal in modern society?"},
+            {cn:"可以選擇出生在另一個時代，會選哪裡？", en:"If you could be born in another era, when would it be?"},
+            {cn:"你覺得法國代表著什麼樣的精神？", en:"What spirit do you think France represents?"},
+            {cn:"男人與女人在現代社會中真的平等了嗎？", en:"Do you think men and women are truly equal now?"},
             {cn:"你對「宗教」的真實看法是什麼？", en:"What are your honest views on religion?"},
             {cn:"你相信靈魂的存在嗎？", en:"Do you believe in the existence of the soul?"},
             {cn:"你覺得什麼樣的生活才算「值得過」？", en:"What kind of life do you consider a life 'worth living'?"},
-            {cn:"你對「傳統」應該被挑戰還是被繼承的看法？", en:"Should traditions be challenged or inherited?"},
+            {cn:"傳統應該被挑戰還是被繼承？", en:"Should traditions be challenged or inherited?"},
             {cn:"你覺得這世界上最難吃的食物是什麼？", en:"What do you think is the worst-tasting food in the world?"},
-            {cn:"如果你要拍一部自傳電影，你希望誰來演你？", en:"If you were to make a biopic, who would you want to play you?"},
+            {cn:"如果要拍一部自傳電影，你希望誰來演你？", en:"If you were to make a biopic, who should play you?"},
             {cn:"你最喜歡的一句法文諺語？", en:"What is your favorite French proverb?"},
-            {cn:"你覺得這場旅行目前為止最讓你驚訝的是什麼？", en:"What has surprised you the most about this trip so far?"},
-            {cn:"你覺得自己什麼時候最像「真正的自己」？", en:"When do you feel most like your 'true self'?"},
-            {cn:"如果你能中頭獎，你明天會做的第一件事是什麼？", en:"If you won the lottery, what is the first thing you would do tomorrow?"},
-            {cn:"你覺得金錢能買到多少比例的快樂？", en:"What percentage of happiness do you think money can buy?"},
-            {cn:"你最想去但還沒去過的國家？", en:"What country do you most want to visit but haven't yet?"}
+            {cn:"這場旅行目前為止最讓你驚訝的是什麼？", en:"What has surprised you most about this trip so far?"},
+            {cn:"你什麼時候最像「真正的自己」？", en:"When do you feel most like your 'true self'?"},
+            {cn:"如果能中頭獎，你明天會做的第一件事？", en:"If you won the lottery, what's the first thing you'd do?"},
+            {cn:"金錢能買到多少比例的快樂？", en:"What percentage of happiness can money buy?"},
+            {cn:"你最想去但還沒去過的國家？", en:"What country do you most want to visit?"}
         ],
         money: [
-            {cn:"金錢對你而言，代表的是「自由」還是「安全感」？", en:"Does money represent 'freedom' or 'security' to you?"},
-            {cn:"你對「伴侶間各付各的（AA制）」真實看法是什麼？", en:"What is your honest opinion on splitting bills (going Dutch) in a relationship?"},
-            {cn:"你覺得兩個人在一起，一定要財富相當嗎？", en:"Do you think a couple must have similar financial standing?"},
-            {cn:"你更傾向於存錢為了未來，還是花錢享受當下？", en:"Do you lean towards saving for the future or spending to enjoy the present?"},
-            {cn:"你最看不起哪種賺錢的方式？", en:"What method of earning money do you look down upon the most?"},
-            {cn:"如果你突然贏得一千萬歐元，你的生活會發生什麼改變？", en:"If you suddenly won 10 million euros, how would your life change?"},
-            {cn:"你覺得一個男人必須擁有多少資產，才會有自信？", en:"How much wealth do you think a man needs to feel confident?"},
+            {cn:"金錢代表的是「自由」還是「安全感」？", en:"Does money represent 'freedom' or 'security' to you?"},
+            {cn:"你對「AA制」的真實看法是什麼？", en:"What is your honest opinion on splitting bills?"},
+            {cn:"兩個人在一起，一定要財富相當嗎？", en:"Do you think a couple must have similar financial standing?"},
+            {cn:"存錢為了未來，還是花錢享受當下？", en:"Save for the future or spend to enjoy the present?"},
+            {cn:"你最看不起哪種賺錢的方式？", en:"What method of earning money do you look down upon most?"},
+            {cn:"如果贏得一千萬歐元，你的生活會如何改變？", en:"If you won 10 million euros, how would your life change?"},
+            {cn:"男人必須擁有多少資產，才會有自信？", en:"How much wealth does a man need to feel confident?"},
             {cn:"你會借錢給朋友嗎？底線在哪？", en:"Would you lend money to friends? What is your limit?"},
-            {cn:"你覺得「大方」是一種天性，還是可以培養的？", en:"Do you think 'generosity' is innate or can be cultivated?"},
-            {cn:"你在旅行中最不願意省錢的地方在哪裡？", en:"Where are you least willing to save money when traveling?"},
-            {cn:"你對「奢侈品」的定義與看法是什麼？", en:"What is your definition and opinion of 'luxury goods'?"},
-            {cn:"你覺得「工作」是為了生活，還是生活的一部分？", en:"Is work a means to live, or part of life itself?"},
+            {cn:"「大方」是天性，還是可以培養的？", en:"Is generosity innate or can it be cultivated?"},
+            {cn:"旅行中最不願意省錢的地方在哪裡？", en:"Where are you least willing to save money when traveling?"},
+            {cn:"你對「奢侈品」的定義與看法是什麼？", en:"What is your definition and opinion of luxury goods?"},
+            {cn:"「工作」是為了生活，還是生活的一部分？", en:"Is work a means to live, or part of life itself?"},
             {cn:"你覺得「權力」會讓人腐化嗎？", en:"Do you think power corrupts people?"},
-            {cn:"你曾經有過極度缺錢的經歷嗎？那教了你什麼？", en:"Have you ever experienced extreme poverty? What did it teach you?"},
+            {cn:"有過極度缺錢的經歷嗎？教了你什麼？", en:"Ever experienced extreme poverty? What did it teach you?"},
             {cn:"你對「債務」的恐懼程度有多少？", en:"How much fear do you have regarding debt?"},
-            {cn:"你會為了高薪而去做一份你討厭的工作嗎？", en:"Would you take a job you hate for a high salary?"},
+            {cn:"會為了高薪去做一份你討厭的工作嗎？", en:"Would you take a job you hate for a high salary?"},
             {cn:"你覺得金錢能買到真愛嗎？", en:"Do you believe money can buy true love?"},
-            {cn:"你最理想的居住環境是奢華的還是簡約的？", en:"Is your ideal living environment luxurious or minimalist?"},
-            {cn:"你覺得「窮」是懶惰造成的，還是系統性的問題？", en:"Do you think poverty is caused by laziness or systemic issues?"},
-            {cn:"你對「社會地位」這件事的真實看法？", en:"What is your honest view on 'social status'?"},
+            {cn:"理想居住環境是奢華還是簡約？", en:"Is your ideal living environment luxurious or minimalist?"},
+            {cn:"「窮」是懶惰還是系統性的問題？", en:"Is poverty caused by laziness or systemic issues?"},
+            {cn:"你對「社會地位」這件事的真實看法？", en:"What is your honest view on social status?"},
             {cn:"你心目中的「財富自由」是多少數字？", en:"What is your number for 'financial freedom'?"},
             {cn:"你如何看待「名聲」這件事？", en:"How do you perceive 'fame'?"},
-            {cn:"如果你創業，你最想做什麼行業？", en:"If you started a business, what industry would it be in?"},
+            {cn:"如果你創業，你最想做什麼行業？", en:"If you started a business, what industry would it be?"},
             {cn:"你覺得「保險」是必要的嗎？", en:"Do you think insurance is necessary?"},
-            {cn:"如果你要買一樣非常貴的東西，你會猶豫多久？", en:"How long do you hesitate before buying something very expensive?"},
-            {cn:"你覺得父母應該留遺產給小孩嗎？", en:"Do you think parents should leave inheritances for their children?"},
-            {cn:"你覺得金錢帶給你最大的快樂是什麼？", en:"What is the greatest joy money brings you?"},
-            {cn:"如果明天金錢制度消失了，你會用什麼來交換你需要的東西？", en:"If the monetary system disappeared tomorrow, what would you barter with?"},
-            {cn:"你對「數字貨幣（比特幣等）」的看法？", en:"What is your view on cryptocurrency (Bitcoin, etc.)?"},
-            {cn:"你曾經做過最冒險的一次金錢決定是什麼？", en:"What is the riskiest financial decision you have ever made?"},
-            {cn:"你最想具備但目前還沒有的品格是什麼？", en:"What character trait do you most wish you had but currently don't?"},
-            {cn:"你覺得金錢與權力，哪個更吸引你？", en:"Which is more attractive to you: money or power?"},
-            {cn:"你對「快時尚」的看法是什麼？", en:"What is your opinion on 'fast fashion'?"},
+            {cn:"買非常貴的東西，你會猶豫多久？", en:"How long do you hesitate before buying something expensive?"},
+            {cn:"你覺得父母應該留遺產給小孩嗎？", en:"Do you think parents should leave inheritances?"},
+            {cn:"金錢帶給你最大的快樂是什麼？", en:"What is the greatest joy money brings you?"},
+            {cn:"金錢制度消失了，你會用什麼交換物資？", en:"If money disappeared, what would you barter with?"},
+            {cn:"你對「數字貨幣」的看法？", en:"What is your view on cryptocurrency?"},
+            {cn:"曾經做過最冒險的一次金錢決定？", en:"What is the riskiest financial decision you've made?"},
+            {cn:"想具備但目前還沒有的品格是什麼？", en:"What character trait do you wish you had but don't?"},
+            {cn:"金錢與權力，哪個更吸引你？", en:"Which is more attractive to you: money or power?"},
+            {cn:"你對「快時尚」的看法是什麼？", en:"What is your opinion on fast fashion?"},
             {cn:"你如何定義「成功」？", en:"How do you define 'success'?"},
             {cn:"你覺得社會公平真的存在嗎？", en:"Do you believe social fairness truly exists?"},
-            {cn:"你對「小費文化」的真實想法是什麼？", en:"What are your honest thoughts on tipping culture?"},
-            {cn:"你覺得服裝能代表一個人的內心嗎？", en:"Do you think clothing reflects a person's inner self?"},
+            {cn:"你對「小費文化」的真實想法？", en:"What are your honest thoughts on tipping culture?"},
+            {cn:"服裝能代表一個人的內心嗎？", en:"Do you think clothing reflects a person's inner self?"},
             {cn:"你最喜歡的一種酒？", en:"What is your favorite type of alcohol?"},
             {cn:"你的手機桌面是什麼照片？", en:"What photo is currently your phone wallpaper?"},
             {cn:"你最不喜歡哪種天氣？", en:"What kind of weather do you dislike the most?"}
         ],
         deep: [
-            {cn:"你童年最想抹去的一段記憶是什麼？", en:"What is one childhood memory you wish you could erase?"},
-            {cn:"你的父母對你的性格造成最大的負面影響是什麼？", en:"What is the biggest negative impact your parents had on your personality?"},
-            {cn:"你人生中最黑暗的一段時期，你是怎麼走出來的？", en:"How did you get through the darkest period of your life?"},
+            {cn:"童年最想抹去的一段記憶是什麼？", en:"What is one childhood memory you wish you could erase?"},
+            {cn:"父母對你性格造成的最大負面影響？", en:"What is the biggest negative impact your parents had on you?"},
+            {cn:"人生最黑暗的時期，你是怎麼走出來的？", en:"How did you get through the darkest period of your life?"},
             {cn:"你覺得「時間」真的能治癒一切嗎？", en:"Do you believe time truly heals all wounds?"},
-            {cn:"你最想對那個「十歲的你」說什麼安撫的話？", en:"What comforting words would you say to your ten-year-old self?"},
-            {cn:"什麼樣的擁抱會讓你覺得「真的安全了」？", en:"What kind of hug makes you feel truly safe?"},
+            {cn:"對十歲的你說什麼安撫的話？", en:"What comforting words would you say to your ten-year-old self?"},
+            {cn:"什麼樣的擁抱會讓你覺得「安全了」？", en:"What kind of hug makes you feel truly safe?"},
             {cn:"你曾對誰有過深刻的愧疚感？", en:"Who have you felt deep guilt towards?"},
-            {cn:"你第一次感受到「失去」的痛苦是什麼時候？", en:"When did you first experience the pain of 'loss'?"},
+            {cn:"第一次感受到「失去」的痛苦是什麼時候？", en:"When did you first experience the pain of loss?"},
             {cn:"你曾經感覺被全世界背叛過嗎？", en:"Have you ever felt betrayed by the whole world?"},
-            {cn:"你心中最深處的一個遺憾，現在想起來還會痛嗎？", en:"Does your deepest regret still hurt when you think about it now?"},
-            {cn:"你覺得自己被治癒了嗎？還是只是帶著傷口生活？", en:"Do you feel you are healed, or are you just living with your wounds?"},
-            {cn:"你最希望父母對你說的一聲「對不起」是為了什麼？", en:"What do you most wish your parents would apologize for?"},
-            {cn:"你的家庭裡有什麼「禁忌話題」是不能談的？", en:"What 'taboo topics' are forbidden in your family?"},
-            {cn:"你曾有過覺得自己「不配得到幸福」的時刻嗎？", en:"Have you ever had moments where you felt you didn't deserve happiness?"},
+            {cn:"最深處的一個遺憾，現在還會痛嗎？", en:"Does your deepest regret still hurt when you think about it?"},
+            {cn:"你被治癒了嗎，還是帶著傷口生活？", en:"Are you healed, or just living with your wounds?"},
+            {cn:"希望父母對你說的一聲「對不起」？", en:"What do you most wish your parents would apologize for?"},
+            {cn:"家庭裡有什麼「禁忌話題」不能談？", en:"What taboo topics are forbidden in your family?"},
+            {cn:"曾有過覺得自己「不配幸福」的時刻嗎？", en:"Have you ever felt you didn't deserve happiness?"},
             {cn:"你第一次心碎是為了什麼？", en:"What caused your first heartbreak?"},
             {cn:"你最怕被誰否定？", en:"Whose rejection do you fear the most?"},
             {cn:"哪一個人的去世對你的影響最大？", en:"Whose death had the greatest impact on you?"},
-            {cn:"你曾為了合群而被迫隱藏過自己的哪一部分？", en:"What part of yourself have you felt forced to hide to fit in?"},
-            {cn:"你覺得「原諒別人」與「原諒自己」，哪個更難？", en:"Which do you find harder: forgiving others or forgiving yourself?"},
-            {cn:"你有什麼「PTSD」的小觸發點（地雷）？", en:"Do you have any small PTSD triggers?"},
-            {cn:"你的心靈避風港是什麼樣子的？", en:"What does your mental sanctuary (safe space) look like?"},
-            {cn:"你覺得在一段感情中，坦白創傷會讓兩個人更近，還是更遠？", en:"Does confessing traumas in a relationship bring a couple closer or push them apart?"},
+            {cn:"為了合群而被迫隱藏過哪一部分？", en:"What part of yourself have you hidden to fit in?"},
+            {cn:"「原諒別人」與「原諒自己」，哪個更難？", en:"Which is harder: forgiving others or yourself?"},
+            {cn:"你有什麼「PTSD」的小觸發點？", en:"Do you have any small PTSD triggers?"},
+            {cn:"你的心靈避風港是什麼樣子的？", en:"What does your mental sanctuary look like?"},
+            {cn:"坦白創傷會讓兩人更近還是更遠？", en:"Does confessing traumas bring a couple closer or apart?"},
             {cn:"什麼樣的夢想是你已經放棄了的？", en:"What dreams have you already given up on?"},
-            {cn:"你小時候最害怕的怪物或事物是什麼？", en:"What monster or thing were you most afraid of as a child?"},
+            {cn:"小時候最害怕的怪物或事物是什麼？", en:"What thing were you most afraid of as a child?"},
             {cn:"哪一段旅行徹底改變了你的價值觀？", en:"What trip radically changed your values?"},
             {cn:"你覺得你的根在哪裡？", en:"Where do you feel your roots are?"},
-            {cn:"如果你可以跟動物說話，你選哪種動物？", en:"If you could talk to an animal, which one would you choose?"},
+            {cn:"如果你可以跟動物說話，你選哪種？", en:"If you could talk to an animal, which one would you choose?"},
             {cn:"你最理想的約會場景應該在哪裡？", en:"Where would your ideal date take place?"},
             {cn:"你最希望擁有誰的聲音？", en:"Whose voice do you wish you had?"},
             {cn:"你最懷念哪一個年紀的自己？", en:"Which age version of yourself do you miss the most?"},
-            {cn:"如果我們以後發生不愉快，你希望我們如何「修復」這段關係？", en:"If we have conflicts later, how do you hope we repair the relationship?"},
+            {cn:"以後發生不愉快，你希望如何修復？", en:"If we have conflicts, how do you hope we repair it?"},
             {cn:"你覺得自己對哪一部分感到最脆弱？", en:"What part of yourself do you feel most vulnerable about?"},
-            {cn:"什麼樣的時刻會讓你覺得「活著真好」？", en:"What kind of moments make you feel 'it's good to be alive'?"},
+            {cn:"什麼樣的時刻會讓你覺得「活著真好」？", en:"What moments make you feel 'it's good to be alive'?"},
             {cn:"你曾有過生死一瞬的經歷嗎？", en:"Have you ever had a near-death experience?"},
             {cn:"你對「死亡」最恐懼的地方是什麼？", en:"What do you fear most about death?"},
-            {cn:"如果你房子著火只能救一件非生物，你會救什麼？", en:"If your house were on fire and you could save one inanimate object, what would it be?"},
-            {cn:"你最受不了伴侶對你做的一件事是什麼？", en:"What is the one thing you cannot stand a partner doing to you?"},
-            {cn:"你覺得真正的「平靜」是什麼樣的感覺？", en:"What does true 'peace' feel like to you?"},
-            {cn:"你覺得人性中最神聖的部分是什麼？", en:"What do you believe is the most sacred part of humanity?"},
+            {cn:"房子著火只能救一件非生物，救什麼？", en:"If your house were on fire, what one object would you save?"},
+            {cn:"最受不了伴侶對你做的一件事？", en:"What is the one thing you can't stand a partner doing?"},
+            {cn:"真正的「平靜」是什麼感覺？", en:"What does true 'peace' feel like to you?"},
+            {cn:"你覺得人性中最神聖的部分是什麼？", en:"What is the most sacred part of humanity?"},
             {cn:"最後一個問題：你現在在想什麼？", en:"Last question: What are you thinking about right now?"}
         ]
     };
 
     let currentCat = 'all';
-    let isFlipped = false; // 追蹤卡片狀態
+    let isFlipped = false;
 
-    // 設定類別按鈕
     function setCat(c, b) {
         currentCat = c;
         document.querySelectorAll('.f-btn').forEach(btn => btn.classList.remove('active'));
         b.classList.add('active');
     }
 
-    // 核心抽取邏輯 (包含翻轉動畫)
     function drawAction() {
         const cardWrapper = document.getElementById('cardWrapper');
-        
-        // 步驟1: 如果卡片已經翻開，先把它蓋回去
         if (isFlipped) {
             cardWrapper.classList.remove('flipped');
             isFlipped = false;
-            
-            // 等待蓋牌動畫完成 (800ms) 後，再進行抽新牌和翻開的動作
-            setTimeout(() => {
-                drawAndReveal();
-            }, 800); 
+            setTimeout(() => { drawAndReveal(); }, 800); 
         } else {
-            // 如果卡片是蓋著的，直接抽取並翻開
             drawAndReveal();
         }
     }
 
-    // 抽取新問題並翻開卡片
     function drawAndReveal() {
         let pool = [];
         if (currentCat === 'all') Object.values(data).forEach(a => pool = pool.concat(a));
         else pool = data[currentCat];
-        
         const randomIndex = Math.floor(Math.random() * pool.length);
         const selectedQ = pool[randomIndex];
-        
-        // 更新卡片正面的文字
         document.getElementById('q-cn').innerText = selectedQ.cn;
         document.getElementById('q-en').innerText = selectedQ.en;
-        
-        // 翻開卡片
+        document.getElementById('cat').innerText = currentCat.toUpperCase();
         document.getElementById('cardWrapper').classList.add('flipped');
         isFlipped = true;
     }
